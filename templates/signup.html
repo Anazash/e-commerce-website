@@ -1,0 +1,184 @@
+
+
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .card {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+    
+        .card-header {
+            background-color: #17a2b8;
+            color: #fff;
+            font-weight: bold;
+        }
+    
+        .form-control {
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            padding-left: 0;
+            font-size: 14px;
+            background-color: #f5f5f5;
+            color: #555;
+        }
+    
+        .form-control:focus {
+            box-shadow: none;
+        }
+    
+        .form-control::placeholder {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+    
+        .input-group-text {
+            border: none;
+            background-color: transparent;
+            color: #b0b0b0;
+        }
+    
+        .btn-primary {
+            background-color: #17a2b8;
+            border: none;
+            border-radius: 0;
+            font-weight: bold;
+        }
+    
+        .btn-primary:hover {
+            background-color: #138496;
+        }
+    
+        .custom-file-label {
+            background-color: #fff;
+            border: none;
+        }
+    
+        .custom-file-label::after {
+            border: none;
+            background-color: transparent;
+        }
+    
+        .dropdown-toggle::after {
+            display: none;
+        }
+    
+        .dropdown-item {
+            font-size: 14px;
+        }
+    
+        .dropdown-item.active,
+        .dropdown-item:active {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+    
+        .error {
+            color: red;
+            font-size: 12px;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        /* Style the form fields */
+        .form-group label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input {
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s;
+        }
+
+        .form-group input:focus {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group button {
+            padding: 10px 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">Sign Up Form</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'add_user' %}"  enctype="multipart/form-data">
+
+                            {% csrf_token %}
+                            {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">User Name</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm_password">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" name="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control" id="age" name="age" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="number">Contact Number</label>
+                                <input type="tel" class="form-control" id="number" name="number" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

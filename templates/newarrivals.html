@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Hexashop Ecommerce HTML CSS Template</title>
+
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-hexashop.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/owl-carousel.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/lightbox.css' %}">
+    </head>
+    
+	<style>
+		body {
+			background-color: #f8f8f8;
+			font-family: 'Poppins', sans-serif;
+			font-size: 16px;
+		}
+		
+		h2 {
+			font-size: 36px;
+			color: #333;
+			margin-bottom: 20px;
+		}
+		
+		.section-heading span {
+			display: block;
+			font-size: 18px;
+			color: #999;
+			margin-bottom: 30px;
+		}
+		
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 50px;
+		}
+		
+		table td {
+			padding: 15px;
+			border: 1px solid #ddd;
+			text-align: left;
+			vertical-align: middle;
+		}
+		
+		table td img {
+			display: block;
+			margin: 0 auto;
+			max-height: 50px;
+			max-width: 50px;
+		}
+		
+		table td button {
+			background: #333;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		
+		table td button:hover {
+			background: #fff;
+			color: #333;
+			border: 1px solid #333;
+		}
+		
+		/* Style the table header */
+		table th {
+			background-color: #f2f2f2;
+			color: #333;
+			text-align: left;
+			padding: 15px;
+			border: 1px solid #ddd;
+		}
+		
+		/* Style alternate rows */
+		table tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+		.section-padding {
+			padding: 10px 0;
+			background-color: #fff;
+		  }
+		  
+		  .section-heading {
+			text-align: center;
+			margin-bottom: 60px;
+		  }
+		  
+		  .section-heading h2 {
+			font-size: 40px;
+			font-weight: 700;
+			color: #333;
+			margin-bottom: 10px;
+		  }
+		  
+		  .section-heading span {
+			font-size: 18px;
+			color: #777;
+		  }
+		  
+	</style>
+	
+    
+	<body style="margin-top:110px">
+		<header class="header-area header-sticky">
+		  <div class="container">
+			  <div class="row">
+				  <div class="col-12">
+					  <nav class="main-nav">
+						  <a href="index.html" class="logo">
+							  <img src="{% static 'assets/images/logo.png' %}">
+						  </a>
+						  <ul class="nav">                
+							  <li><a href="{% url 'home' %}">Home</a></li>
+						  </ul>        
+					  </nav>
+				  </div>
+			  </div>
+		  </div>
+	  </header>
+	  <section class="section-padding">
+		<div class="container">
+		  <div class="section-heading">
+			<h2>New Arrivals</h2>
+			<span>Check out our latest products</span>
+		  </div>
+		</div>
+	  </section>
+	  
+		<table>
+			{% for p in products %}
+			<tr>
+			<td>{{p.name}}</td>
+			<td>{{p.price}}</td>
+			<td>{{p.description}}</td>
+			<td><img src="{{p.image.url}}" alt="{{p.name}}" height="50" width="50"></td>
+			<td>
+				<form method="POST" action="{% url 'add_to_cart' %}">
+				{% csrf_token %}
+				<input type="hidden" name="name" value="{{ p.name }}">
+				<input type="hidden" name="price" value="{{ p.price }}">
+				<input type="hidden" name="description" value="{{ p.description }}">
+				<input type="hidden" name="image" value="{{ p.image.url }}">
+				<button type="submit"><i class="fa fa-shopping-cart"></i></button>
+				</form>
+			</td>
+			</tr>
+			{% endfor %}
+
+		</table>
+	</section>
+	
+</body>
+</html>
